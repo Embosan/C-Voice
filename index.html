@@ -3,191 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmbosanTech - Panel de Comunicación</title>
-    
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-    <link rel="apple-touch-icon" href="icon-192.png">
-    <link rel="manifest" href="manifest.json">
-    
-    <meta name="theme-color" content="#6c5ce7"> <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    
+    <title>EmbosanTech Voice</title>
     <style>
-        :root {
-            --primary: #6c5ce7;
-            --bg: #f0f2f5;
-            --text: #1a1a1a;
-            --danger: #ff7675;
-            --success: #55efc4;
-            --info: #74b9ff;
-        }
-
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg);
-            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
 
         .container {
             background: white;
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 600px;
-            box-sizing: border-box;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
         }
 
-        h1 { font-size: 20px; color: var(--text); margin-bottom: 20px; text-align: center; }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .btn-quick {
-            border: none;
-            padding: 20px 10px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.1s;
-            color: #2d3436;
-        }
-
-        .btn-quick:active { transform: scale(0.95); }
-        .btn-need { background-color: var(--info); }
-        .btn-state { background-color: var(--success); }
-        .btn-urgent { background-color: var(--danger); color: white; }
+        h1 { color: #1a1a1a; margin-bottom: 1.5rem; font-size: 24px; }
 
         textarea {
             width: 100%;
-            height: 100px;
+            height: 150px;
             padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            resize: none;
             font-size: 16px;
             box-sizing: border-box;
-            margin-bottom: 10px;
+            transition: border-color 0.3s;
         }
 
-        #botonHablar {
-            background-color: var(--primary);
+        textarea:focus {
+            outline: none;
+            border-color: #6c5ce7;
+        }
+
+        button {
+            background-color: #6c5ce7;
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 12px 30px;
+            border-radius: 25px;
             font-size: 18px;
-            width: 100%;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s, background-color 0.2s;
+            width: 100%;
         }
 
-        #botonHablar:disabled { background-color: #ccc; cursor: not-allowed; }
-        .footer { text-align: center; margin-top: 20px; font-size: 10px; color: #bbb; letter-spacing: 1px; }
+        button:hover { background-color: #a29bfe; transform: scale(1.02); }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        
+        .footer { margin-top: 20px; font-size: 12px; color: #aaa; }
     </style>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#007bff">
-    
-    <link rel="apple-touch-icon" href="icon-192.png">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    
-   
 </head>
 <body>
-    <div class="container">
-        <div id="info-saldo" style="text-align: right; font-size: 12px; margin-bottom: 10px; color: #666;">
-            Créditos: <span id="caracteres-restantes">Cargando...</span>
-        </div>
-        <h1>Panel de comunicación</h1>
-        
-        <div class="quick-actions">
-            <button class="btn-quick" style="background:#a29bfe" onclick="reproducirGrabacion('cau')">👩‍👧 Cau!</button>
-            <button class="btn-quick" style="background:#fd79a8; color:white;" onclick="reproducirGrabacion('mama')">❤️ Mamá!</button>
-            <button class="btn-quick btn-need" onclick="hablarRapido('Agua')">💧 Agua</button>
-            <button class="btn-quick btn-need" onclick="hablarRapido('Hambre')">🥣 Hambre</button>
-            <button class="btn-quick btn-state" onclick="hablarRapido('Estoy bien')">✅ Estoy bien</button>
-            <button class="btn-quick btn-state" onclick="hablarRapido('Quiero descansar un poco')">😴 Descansar</button>
-            <button class="btn-quick btn-urgent" onclick="hablarRapido('Dolor')">⚠️ DOLOR</button>
-            <button class="btn-quick" style="background:#dfe6e9" onclick="hablarRapido('Gracias')">🙏 Gracias</button>
-        </div>
 
-        <textarea id="textoParaHablar" placeholder="O escribe algo personalizado aquí..."></textarea>
-        <button id="botonHablar" onclick="procesarTexto()">Hablar personalizado</button>
-        
-        <div class="footer">Powered by Embosantech</div>
+    <div class="container">
+        <h1>Camila's Voice</h1>
+        <textarea id="textoParaHablar" placeholder="Escribe aquí lo que quieras decir..."></textarea>
+        <button id="botonHablar">Convertir a Voz</button>
+        <div class="footer">Powered by EmbosanTech</div>
     </div>
 
 <script>
-    
-    // 1. CONFIGURACIÓN
+    const boton = document.getElementById('botonHablar');
+    const entradaTexto = document.getElementById('textoParaHablar');
+
+    // --- CONFIGURACIÓN DE EMBOSANTECH ---
     const API_KEY = "2a60b824318622a0da275c152f1c158e8db44ce30727ee193bad86ca834c0048"; 
     const VOICE_ID = "hpp4J3VqNfWAUOO0d1Us"; 
+    // ------------------------------------
 
-    // --- LÓGICA DE SALDO ACTUALIZADA ---
-    const SALDO_INICIAL_CODIGO = 7922; // Tu nuevo saldo real
-    
-    // Si el saldo guardado no existe, usa el del código.
-    let saldoActual = localStorage.getItem('saldo_embosantech') 
-        ? parseInt(localStorage.getItem('saldo_embosantech')) 
-        : SALDO_INICIAL_CODIGO;
+    boton.addEventListener('click', async () => {
+        const texto = entradaTexto.value;
+        if (!texto) return alert("Por favor, escribe algo para Camila.");
 
-    // TRUCO DE MENTOR: Si acabas de actualizar el código manualmente, 
-    // forzamos la actualización si el valor es mayor al guardado (o si quieres resetear)
-    if (localStorage.getItem('ultimo_reset') !== "v2") {
-        saldoActual = SALDO_INICIAL_CODIGO;
-        localStorage.setItem('ultimo_reset', "v2"); // Marcamos que ya actualizamos a esta versión
-    }
-
-    function actualizarSaldoVisual() {
-        const saldoTxt = document.getElementById('caracteres-restantes');
-        if (!saldoTxt) return;
-
-        localStorage.setItem('saldo_embosantech', saldoActual);
-        saldoTxt.innerText = `${saldoActual.toLocaleString()} caracteres`;
-
-        if (saldoActual < 1000) {
-            saldoTxt.style.color = 'var(--danger)';
-            saldoTxt.style.fontWeight = 'bold';
-        } else {
-            saldoTxt.style.color = '#666';
-            saldoTxt.style.fontWeight = 'normal';
-        }
-    }
-
-    // Función para reproducir audios pregrabados (locales)
-    function reproducirGrabacion(nombre) {
-    // Creamos la ruta. Asegúrate de crear una carpeta 'audios' en tu repo
-    const audio = new Audio(`./audios/${nombre}.mp3`);
-    
-    audio.play().catch(error => {
-        console.error("Error: No se encuentra el archivo de audio.", error);
-        alert(`Falta el archivo: audios/${nombre}.mp3`);
-    });
-}   
-
-    async function hablar(texto) {
-        if (!texto) return;
-        
-        const btnPrincipal = document.getElementById('botonHablar');
-        btnPrincipal.disabled = true;
+        boton.disabled = true;
+        boton.innerText = "Generando audio...";
 
         try {
             const respuesta = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}`, {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json', 
-                    'xi-api-key': API_KEY 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'xi-api-key': TU_API_KEY
                 },
                 body: JSON.stringify({
                     text: texto,
@@ -199,42 +107,20 @@
             if (!respuesta.ok) throw new Error("Error en la API");
 
             const blob = await respuesta.blob();
-            const audio = new Audio(URL.createObjectURL(blob));
+            const urlAudio = URL.createObjectURL(blob);
+            const audio = new Audio(urlAudio);
+            
+            audio.onended = () => URL.revokeObjectURL(urlAudio); // Limpia memoria
             await audio.play();
 
-            // Restamos y actualizamos
-            saldoActual -= texto.length;
-            actualizarSaldoVisual();
-
-        } catch (e) {
-            console.error(e);
-            alert("Error: No se pudo reproducir el audio.");
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error de conexión. Verifica tu API Key.");
         } finally {
-            btnPrincipal.disabled = false;
+            boton.disabled = false;
+            boton.innerText = "Convertir a Voz";
         }
-    }
-
-    function hablarRapido(texto) {
-        hablar(texto);
-    }
-
-    function procesarTexto() {
-        const campo = document.getElementById('textoParaHablar');
-        if (campo.value.trim() !== "") {
-            hablar(campo.value);
-            campo.value = ""; 
-        }
-    }
-
-    // Inicialización al cargar la página
-    actualizarSaldoVisual();
-    if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('✅ EmbosanVoice: Service Worker registrado con éxito', reg))
-        .catch(err => console.warn('❌ Error al registrar el Service Worker', err));
     });
-    }
 </script>
 </body>
 </html>

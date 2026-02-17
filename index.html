@@ -112,8 +112,6 @@
         <h1>Panel de comunicación</h1>
         
         <div class="quick-actions">
-            <button class="btn-quick" style="background:#a29bfe" onclick="reproducirGrabacion('cau')">👩‍👧 Cau!</button>
-            <button class="btn-quick" style="background:#fd79a8; color:white;" onclick="reproducirGrabacion('mama')">❤️ Mamá!</button>
             <button class="btn-quick btn-need" onclick="hablarRapido('Agua')">💧 Agua</button>
             <button class="btn-quick btn-need" onclick="hablarRapido('Hambre')">🥣 Hambre</button>
             <button class="btn-quick btn-state" onclick="hablarRapido('Estoy bien')">✅ Estoy bien</button>
@@ -164,17 +162,6 @@
             saldoTxt.style.fontWeight = 'normal';
         }
     }
-
-    // Función para reproducir audios pregrabados (locales)
-    function reproducirGrabacion(nombre) {
-    // Creamos la ruta. Asegúrate de crear una carpeta 'audios' en tu repo
-    const audio = new Audio(`./audios/${nombre}.mp3`);
-    
-    audio.play().catch(error => {
-        console.error("Error: No se encuentra el archivo de audio.", error);
-        alert(`Falta el archivo: audios/${nombre}.mp3`);
-    });
-}   
 
     async function hablar(texto) {
         if (!texto) return;
